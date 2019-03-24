@@ -24,7 +24,7 @@ public class User {
      */
     private List<Role> roles;
     /**
-     * 角色
+     * 菜单
      */
     private List<Menu> menus;
 
