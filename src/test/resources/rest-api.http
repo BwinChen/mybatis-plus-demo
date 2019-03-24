@@ -1,10 +1,67 @@
-GET http://localhost:8080/node/tree
+GET http://localhost:8080/menu/getChildrenByParentId/1
 
-<> 2019-03-22T084614.200.json
+<> 2019-03-24T102318.200.json
 
 ###
-GET http://localhost:8080/node/1
+GET http://localhost:8080/menu/getChildrenByParentIdAndUserId?parentId=1&userId=1109774860779036673
 
-<> 2019-03-22T090344.200.json
+<> 2019-03-24T103211.200.json
+
+###
+GET http://localhost:8080/menu/getParentsById/7
+
+<> 2019-03-23T060706.200.json
+
+###
+POST http://localhost:8080/dictionary
+Content-type: application/json; charset=utf-8
+
+{"name" : "sex", "value" : "m", "text" : "男", "comments" : "性别"}
+//{"name" : "sex", "value" : "f", "text" : "女", "comments" : "性别"}
+//{"name" : "sex", "value" : "n", "text" : "中", "comments" : "性别"}
+
+<> 2019-03-23T044051.200.json
+
+###
+GET http://localhost:8080/dictionary/getByName/sex
+
+<> 2019-03-23T042746.200.json
+
+###
+GET http://localhost:8080/dictionary/getByNameAndValue?name=sex&value=f
+
+<> 2019-03-24T062524.200.json
+
+###
+GET http://localhost:8080/dictionary/getByPage?page=1&size=2
+
+<> 2019-03-23T050038.200.json
+
+###
+POST http://localhost:8080/user
+Content-type: application/json; charset=utf-8
+
+{"name" : "name3", "password" : "password3", "email" : "email3", "cellphoneNumber" : 13696844150, "sex" : "n"}
+
+<> 2019-03-24T071314.200.json
+
+###
+GET http://localhost:8080/user/getByPage?page=1&size=2
+
+<> 2019-03-24T104653.200.json
+
+###
+POST http://localhost:8080/role
+Content-type: application/json; charset=utf-8
+
+//{"name" : "ROLE_USER", "comment" : "用户"}
+{"name" : "ROLE_ADMIN", "comment" : "管理员"}
+
+<> 2019-03-24T090902.200.json
+
+###
+GET http://localhost:8080/role/getByPage?page=1&size=2
+
+<> 2019-03-24T091017.200.json
 
 ###
