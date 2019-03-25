@@ -25,4 +25,9 @@ public class RoleController {
         return new Response<>(roleService.findByPage(page, size));
     }
 
+    @DeleteMapping("/deleteById/{id}")
+    public Response deleteById(@PathVariable("id") String id) {
+        return new Response<>(roleService.deleteById(id));
+    }
+
 }

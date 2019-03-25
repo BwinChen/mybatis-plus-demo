@@ -1,6 +1,8 @@
 package com.bwin.mybatisplus.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.Version;
+import com.bwin.mybatisplus.entity.enums.SexEnum;
 import lombok.Data;
 import java.util.List;
 
@@ -12,13 +14,11 @@ public class User {
     private String password;
     private String email;
     private Long cellphoneNumber;
-    private String sex;
+    private SexEnum sex;
+    @TableLogic
+    private Integer deleted = 0;
     @Version
     private Integer version = 0;
-    /**
-     * 性别字典
-     */
-    private Dictionary sexDictionary;
     /**
      * 角色
      */
@@ -27,5 +27,13 @@ public class User {
      * 菜单
      */
     private List<Menu> menus;
+    /**
+     * 性别字典
+     */
+    private Dictionary sexDictionary;
+    /**
+     * 删除状态字典
+     */
+    private Dictionary deleteStatusDictionary;
 
 }

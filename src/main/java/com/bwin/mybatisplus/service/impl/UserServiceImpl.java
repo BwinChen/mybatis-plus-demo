@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
+    @Override
     public User save(User user) {
         if (StringUtils.isBlank(user.getId())) {
             if (userMapper.insert(user) > 0) {
@@ -30,11 +31,22 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
     public IPage<User> findByPage(Integer pageNo, Integer size) {
         Page<User> page = new Page<>();
         page.setCurrent(pageNo);
         page.setSize(size);
         return userMapper.selectByPage(page);
+    }
+
+    @Override
+    public User findByName(String name) {
+        return userMapper.selectByName(name);
+    }
+
+    @Override
+    public int deleteById(String id) {
+        return userMapper.deleteById(id);
     }
 
 }

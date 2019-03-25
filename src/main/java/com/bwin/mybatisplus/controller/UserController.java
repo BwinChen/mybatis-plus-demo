@@ -25,4 +25,14 @@ public class UserController {
         return new Response<>(userService.findByPage(page, size));
     }
 
+    @GetMapping("/getByName")
+    public Response getByName(String name) {
+        return new Response<>(userService.findByName(name));
+    }
+
+    @DeleteMapping("/deleteById/{id}")
+    public Response deleteById(@PathVariable("id") String id) {
+        return new Response<>(userService.deleteById(id));
+    }
+
 }

@@ -19,6 +19,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 
     private final DictionaryMapper dictionaryMapper;
 
+    @Override
     public Dictionary save(Dictionary dictionary) {
         if (StringUtils.isBlank(dictionary.getId())) {
             if (dictionaryMapper.insert(dictionary) > 0) {
@@ -32,6 +33,7 @@ public class DictionaryServiceImpl implements DictionaryService {
         return null;
     }
 
+    @Override
     public IPage<Dictionary> findByPage(Integer pageNo, Integer size) {
         Page<Dictionary> page = new Page<>();
         page.setCurrent(pageNo);
@@ -39,14 +41,21 @@ public class DictionaryServiceImpl implements DictionaryService {
         return dictionaryMapper.selectByPage(page);
     }
 
+    @Override
     public List<Dictionary> findByName(String name) {
         QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<> ();
         queryWrapper.eq("name", name);
         return dictionaryMapper.selectList(queryWrapper);
     }
 
+    @Override
     public Dictionary findByNameAndValue(String name, String value) {
         return dictionaryMapper.selectByNameAndValue(name, value);
+    }
+
+    @Override
+    public int deleteById(String id) {
+        return dictionaryMapper.deleteById(id);
     }
 
 }

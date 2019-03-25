@@ -17,6 +17,7 @@ public class RoleServiceImpl implements RoleService {
 
     private final RoleMapper roleMapper;
 
+    @Override
     public Role save(Role role) {
         if (StringUtils.isBlank(role.getId())) {
             if (roleMapper.insert(role) > 0) {
@@ -30,11 +31,17 @@ public class RoleServiceImpl implements RoleService {
         return null;
     }
 
+    @Override
     public IPage<Role> findByPage(Integer pageNo, Integer size) {
         Page<Role> page = new Page<>();
         page.setCurrent(pageNo);
         page.setSize(size);
         return roleMapper.selectByPage(page);
+    }
+
+    @Override
+    public int deleteById(String id) {
+        return roleMapper.deleteById(id);
     }
 
 }

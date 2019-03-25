@@ -14,4 +14,6 @@ public interface DictionaryService {
 
     Dictionary findByNameAndValue(String name, String value);
 
+    int deleteById(String id);
+
 }

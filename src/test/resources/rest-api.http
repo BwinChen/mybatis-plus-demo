@@ -16,9 +16,11 @@ GET http://localhost:8080/menu/getParentsById/7
 POST http://localhost:8080/dictionary
 Content-type: application/json; charset=utf-8
 
-{"name" : "sex", "value" : "m", "text" : "男", "comments" : "性别"}
-//{"name" : "sex", "value" : "f", "text" : "女", "comments" : "性别"}
-//{"name" : "sex", "value" : "n", "text" : "中", "comments" : "性别"}
+//{"name" : "sex", "value" : "MALE", "text" : "男", "comments" : "性别"}
+//{"name" : "sex", "value" : "FEMALE", "text" : "女", "comments" : "性别"}
+//{"name" : "sex", "value" : "NEUTRAL", "text" : "中", "comments" : "性别"}
+//{"name" : "delete_status", "value" : "0", "text" : "未删除", "comments" : "删除状态"}
+{"name" : "delete_status", "value" : "1", "text" : "已删除", "comments" : "删除状态"}
 
 <> 2019-03-23T044051.200.json
 
@@ -41,7 +43,9 @@ GET http://localhost:8080/dictionary/getByPage?page=1&size=2
 POST http://localhost:8080/user
 Content-type: application/json; charset=utf-8
 
-{"name" : "name3", "password" : "password3", "email" : "email3", "cellphoneNumber" : 13696844150, "sex" : "n"}
+//{"name" : "name1", "password" : "password1", "email" : "email1", "cellphoneNumber" : 18695628010, "sex" : "MALE"}
+//{"name" : "name2", "password" : "password2", "email" : "email2", "cellphoneNumber" : 15260126242, "sex" : "FEMALE"}
+{"name" : "name3", "password" : "password3", "email" : "email3", "cellphoneNumber" : 13696844150, "sex" : "NEUTRAL"}
 
 <> 2019-03-24T071314.200.json
 
@@ -49,6 +53,16 @@ Content-type: application/json; charset=utf-8
 GET http://localhost:8080/user/getByPage?page=1&size=2
 
 <> 2019-03-24T104653.200.json
+
+###
+GET http://localhost:8080/user/getByName?name=name1
+
+<> 2019-03-24T104653.200.json
+
+###
+DELETE http://localhost:8080/user/deleteById/1109775173195964417
+
+<> 2019-03-24T071314.200.json
 
 ###
 POST http://localhost:8080/role

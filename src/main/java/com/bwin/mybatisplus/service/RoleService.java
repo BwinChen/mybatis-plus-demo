@@ -9,4 +9,6 @@ public interface RoleService {
 
     IPage<Role> findByPage(Integer pageNo, Integer size);
 
+    int deleteById(String id);
+
 }

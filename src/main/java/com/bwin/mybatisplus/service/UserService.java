@@ -9,4 +9,8 @@ public interface UserService {
 
     IPage<User> findByPage(Integer pageNo, Integer size);
 
+    User findByName(String name);
+
+    int deleteById(String id);
+
 }

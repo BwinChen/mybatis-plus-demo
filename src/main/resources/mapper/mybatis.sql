@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: mybatis
 -- ------------------------------------------------------
--- Server version	8.0.13
+-- Server version	8.0.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,8 +29,9 @@ CREATE TABLE `dictionary` (
   `text` varchar(255) DEFAULT NULL COMMENT '文本',
   `comments` varchar(255) DEFAULT NULL COMMENT '描述',
   `version` int(11) DEFAULT '0' COMMENT '版本',
+  `deleted` int(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1109374086089617411 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='字典';
+) ENGINE=InnoDB AUTO_INCREMENT=1110076434805592067 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='字典';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +40,7 @@ CREATE TABLE `dictionary` (
 
 LOCK TABLES `dictionary` WRITE;
 /*!40000 ALTER TABLE `dictionary` DISABLE KEYS */;
-INSERT INTO `dictionary` VALUES (1109373994691538946,'sex','n','中','性别',0),(1109374069031383042,'sex','f','女','性别',0),(1109374086089617410,'sex','m','男','性别',0);
+INSERT INTO `dictionary` VALUES (1109373994691538946,'sex','NEUTRAL','中','性别',0,0),(1109374069031383042,'sex','FEMALE','女','性别',0,0),(1109374086089617410,'sex','MALE','男','性别',0,0),(1110076396796809218,'delete_status','0','未删除','删除状态',0,0),(1110076434805592066,'delete_status','1','已删除','删除状态',0,0);
 /*!40000 ALTER TABLE `dictionary` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,6 +56,7 @@ CREATE TABLE `menu` (
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `parent_id` bigint(20) DEFAULT '0' COMMENT '父id',
   `version` int(11) DEFAULT '0' COMMENT '版本',
+  `deleted` int(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`id`),
   KEY `parent_id` (`parent_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='节点表';
@@ -66,7 +68,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (1,'一级节点A',0,0),(2,'一级节点B',0,0),(3,'一级节点C',0,0),(4,'二级节点AA',1,0),(5,'二级节点aa',1,0),(6,'二级节点BB',2,0),(7,'三级级节点AAA',4,0),(8,'三级级节点aaa',4,0),(9,'三级级节点BBB',6,0);
+INSERT INTO `menu` VALUES (1,'一级节点A',0,0,0),(2,'一级节点B',0,0,0),(3,'一级节点C',0,0,0),(4,'二级节点AA',1,0,0),(5,'二级节点aa',1,0,0),(6,'二级节点BB',2,0,0),(7,'三级级节点AAA',4,0,0),(8,'三级级节点aaa',4,0,0),(9,'三级级节点BBB',6,0,0);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,6 +84,7 @@ CREATE TABLE `role` (
   `name` varchar(255) NOT NULL COMMENT '名称',
   `comment` varchar(255) DEFAULT NULL COMMENT '中文名称',
   `version` int(11) NOT NULL DEFAULT '0' COMMENT '版本',
+  `deleted` int(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`id`),
   UNIQUE KEY `role_name_uindex` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1109804316419694594 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='角色表';
@@ -93,7 +96,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1109804181719621633,'ROLE_USER','用户',0),(1109804316419694593,'ROLE_ADMIN','管理员',0);
+INSERT INTO `role` VALUES (1109804181719621633,'ROLE_USER','用户',0,0),(1109804316419694593,'ROLE_ADMIN','管理员',0,0);
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,12 +136,13 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL COMMENT '密码',
   `email` varchar(255) DEFAULT NULL COMMENT '邮箱地址',
   `cellphone_number` bigint(20) DEFAULT NULL COMMENT '手机号',
-  `sex` varchar(1) DEFAULT NULL COMMENT '性别',
+  `sex` varchar(255) DEFAULT NULL COMMENT '性别',
   `version` int(11) NOT NULL DEFAULT '0' COMMENT '版本',
+  `deleted` varchar(255) NOT NULL DEFAULT 'NOT_DELETED' COMMENT '逻辑删除',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name_uindex` (`name`),
   UNIQUE KEY `user_cellphone_number_uindex` (`cellphone_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=1109775173195964418 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=1110052125089361922 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +151,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1109774860779036673,'name1','password1','email1',18695628010,'m',0),(1109775041620647937,'name2','password2','email2',15260126242,'f',0),(1109775173195964417,'name3','password3','email3',13696844150,'n',0);
+INSERT INTO `user` VALUES (1109774860779036673,'name1','password1','email1',18695628010,'MALE',0,'0'),(1109775041620647937,'name2','password2','email2',15260126242,'FEMALE',0,'0'),(1109775173195964417,'name3','password3','email3',13696844150,'NEUTRAL',0,'1');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-24 23:28:13
+-- Dump completed on 2019-03-25 15:51:48

@@ -35,4 +35,9 @@ public class DictionaryController {
         return new Response<> (dictionaryService.findByNameAndValue(name, value));
     }
 
+    @DeleteMapping("/deleteById/{id}")
+    public Response deleteById(@PathVariable("id") String id) {
+        return new Response<>(dictionaryService.deleteById(id));
+    }
+
 }
